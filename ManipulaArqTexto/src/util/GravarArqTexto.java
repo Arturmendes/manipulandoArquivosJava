@@ -11,7 +11,7 @@ public class GravarArqTexto {
 	public static void main(String[] args) {
 		try {
 			
-			System.out.println("Abrindo para gravação teste.txt");
+			System.out.println("Abrindo para gravaÃ§Ã£o teste.txt");
 			
 			FileWriter fout = new FileWriter("teste.txt");
 			PrintWriter pout = new PrintWriter(fout);
