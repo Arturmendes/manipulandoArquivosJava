@@ -1,37 +1,32 @@
 package util;
 
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class GravarArqTexto {
+public class LerArqTexto {
 
 	public static void main(String[] args) {
 		try {
 			
-			System.out.println("Abrindo teste.txt");
+			System.out.println("Abrindo para gravação teste.txt");
 			
-			FileReader fin = new FileReader("teste.txt");
-			BufferedReader bin = new BufferedReader(fin);
+			FileWriter fout = new FileWriter("teste.txt");
+			PrintWriter pout = new PrintWriter(fout);
 			
-			System.out.println("Lendo teste.txt");
-			
-			String linha = bin.readLine();
-			while(linha != null) {
-				System.out.println(linha);
-				linha = bin.readLine();
-			}
-			
+			System.out.println("Gravando teste.txt");
+			pout.println("Linha 01");
+			pout.println("Linha 02");
+			pout.println("Linha 03");
+			pout.println("Linha 04");
+			pout.println("Linha 05");
 			
 			
 			System.out.println("Fechando teste.txt");
-			
-			bin.close();
-			fin.close();
+			pout.close();
+			fout.close();
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("Erro: " + e.getMessage());
