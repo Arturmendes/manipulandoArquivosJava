@@ -107,7 +107,8 @@ public class JanelaPrincipal extends JFrame{
 
 	private void miSalvarOnClick() {
 		String nomeArquivo = "teste.txt";
-		boolean retorno = ManipulaArquivoTXT.gravarArquivoTXT(nomeArquivo, taTexto.getSelectedText(), this);
+		String conteudo = taTexto.getText();
+		boolean retorno = ManipulaArquivoTXT.gravarArquivoTXT(nomeArquivo, taTexto.getText(), this);
 		
 		if(retorno) {
 			JOptionPane.showMessageDialog(this, "Arquivo Salvo!!!" );
