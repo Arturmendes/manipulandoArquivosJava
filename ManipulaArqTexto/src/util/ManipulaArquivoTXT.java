@@ -15,15 +15,15 @@ public class ManipulaArquivoTXT {
 	public static boolean gravarArquivoTXT(String nomeArquivo, String conteudo, JanelaPrincipal janelaPrincipal) {
 		try {
 
-			System.out.println("Abrindo para gravação teste.txt");
+			System.out.println("Abrindo para gravação " + nomeArquivo);
 
 			FileWriter fout = new FileWriter(nomeArquivo);
 			PrintWriter pout = new PrintWriter(fout);
 
-			System.out.println("Gravando teste.txt");
+			System.out.println("Gravando " + nomeArquivo);
 			pout.println(conteudo);
 
-			System.out.println("Fechando teste.txt");
+			System.out.println("Fechando " + nomeArquivo);
 			pout.close();
 			fout.close();
 
