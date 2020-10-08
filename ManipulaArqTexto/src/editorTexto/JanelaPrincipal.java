@@ -1,15 +1,21 @@
 package editorTexto;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
+import util.ManipulaArquivoBin;
 import util.ManipulaArquivoTXT;
 
 public class JanelaPrincipal extends JFrame {
@@ -23,6 +29,7 @@ public class JanelaPrincipal extends JFrame {
 	private JMenuItem miAbrir;
 	private JMenuItem miSalvar;
 	private JMenuItem miSair;
+	private JLabel lbQtdAcesso;
 
 	private JTextArea taTexto;
 
@@ -39,6 +46,8 @@ public class JanelaPrincipal extends JFrame {
 		miSair = new JMenuItem("Sair");
 
 		taTexto = new JTextArea();
+		
+		lbQtdAcesso = new JLabel("Qtd. Acesso: 0");
 
 		mArquivo.add(miNovo);
 		mArquivo.add(miAbrir);
@@ -50,7 +59,10 @@ public class JanelaPrincipal extends JFrame {
 
 		this.setJMenuBar(barraMenu);
 
-		this.getContentPane().add(taTexto);
+		this.getContentPane().add(taTexto, BorderLayout.CENTER);
+		this.getContentPane().add(lbQtdAcesso, BorderLayout.SOUTH);
+		
+		
 
 		miNovo.addActionListener(new ActionListener() {
 
@@ -85,10 +97,37 @@ public class JanelaPrincipal extends JFrame {
 		});
 
 		this.setLocationRelativeTo(null);
+		
+		quantidadeAcesso();
 
 		this.setSize(640, 480);
 		this.setVisible(true);
 
+	}
+
+	private void quantidadeAcesso() {
+		int qtdAcesso = 0;
+		ManipulaArquivoBin arqBin = new ManipulaArquivoBin("draft.bin");
+		try {
+			qtdAcesso = arqBin.leArquivoBin();
+		} catch (FileNotFoundException e1) {
+			qtdAcesso = 0;
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+			e.printStackTrace();
+		}
+		
+		qtdAcesso++;
+		
+		lbQtdAcesso.setText("Qtd. Acesso: " + qtdAcesso);
+		
+		try {
+			arqBin.gravaArquivoBin(qtdAcesso);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+			e.printStackTrace();
+		}
+		
 	}
 
 	private void miSairOnClick() {
@@ -110,10 +149,7 @@ public class JanelaPrincipal extends JFrame {
 			if (retorno2) {
 				JOptionPane.showMessageDialog(this, "Arquivo Salvo!!!");
 			}
-		}
-		
-		
-		
+		}		
 	}
 
 	private void miAbrirOnClick() {
