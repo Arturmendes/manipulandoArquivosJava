@@ -62,6 +62,8 @@ public class JanelaPrincipal extends JFrame {
 		this.getContentPane().add(taTexto, BorderLayout.CENTER);
 		this.getContentPane().add(lbQtdAcesso, BorderLayout.SOUTH);
 		
+		lbQtdAcesso.setText("Qtd. Acesso: " + quantidadeAcesso());
+		
 		
 
 		miNovo.addActionListener(new ActionListener() {
@@ -98,14 +100,15 @@ public class JanelaPrincipal extends JFrame {
 
 		this.setLocationRelativeTo(null);
 		
-		quantidadeAcesso();
+		
+		
 
 		this.setSize(640, 480);
 		this.setVisible(true);
 
 	}
 
-	private void quantidadeAcesso() {
+	private int quantidadeAcesso() {
 		int qtdAcesso = 0;
 		ManipulaArquivoBin arqBin = new ManipulaArquivoBin("draft.bin");
 		try {
@@ -117,9 +120,7 @@ public class JanelaPrincipal extends JFrame {
 			e.printStackTrace();
 		}
 		
-		qtdAcesso++;
-		
-		lbQtdAcesso.setText("Qtd. Acesso: " + qtdAcesso);
+		qtdAcesso++;		
 		
 		try {
 			arqBin.gravaArquivoBin(qtdAcesso);
@@ -127,6 +128,8 @@ public class JanelaPrincipal extends JFrame {
 			JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
 			e.printStackTrace();
 		}
+		
+		return qtdAcesso;
 		
 	}
 
